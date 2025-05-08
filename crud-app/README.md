@@ -1,6 +1,7 @@
 # CrudApp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.
+This project was implemented using Angular v16, but developed using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.<br>
+The project focuses to implement CRUD Application.
 
 ## Development server
 
