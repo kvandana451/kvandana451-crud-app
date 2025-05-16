@@ -1,7 +1,7 @@
 import { Hero } from '../interfaces/hero';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +13,21 @@ export class HeroService {
 
   getHeroes(): Observable<Hero[]> {
     // HttpClient.get() returns the body of the response as an untyped JSON object by default. Applying the optional type specifier, <Hero[]> , adds TypeScript capabilities, which reduce errors during compile time.
-    return this.http.get<Hero[]>(this.heroesUrl);
+    //  get() is a generic function
+    return (
+      this.http
+        .get<Hero[]>(this.heroesUrl)
+        // pipe() is used to connect operators to an Observable.
+        // To transform or handle the data before it reaches subscribe().
+        .pipe(catchError(this.handleError<Hero[]>('getHeroes', [])))
+    );
+  }
+
+  handleError<T>(operation: string, result: T) {
+    return (err: any): Observable<T> => {
+      console.error(err);
+      console.log(operation);
+      return of(result);
+    };
   }
 }
