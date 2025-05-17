@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HeroService } from '../../services/hero-service.service';
 import { Hero } from '../../interfaces/hero';
 import { NgIf } from '@angular/common';
@@ -16,8 +16,18 @@ export class HeroDetailsComponent {
   hero?: Hero;
   constructor(
     private activatedRoute: ActivatedRoute,
-    private heroService: HeroService
+    private heroService: HeroService,
+    private router: Router
   ) {}
+  save(): void {
+    if (this.hero)
+      this.heroService.updateHero(this.hero).subscribe(() => {
+        this.goBack();
+      });
+  }
+  goBack() {
+    this.router.navigate(['/heroes']);
+  }
   ngOnInit() {
     this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.heroService.getHero(this.id).subscribe((val) => {

@@ -31,6 +31,7 @@ export class HeroService {
     };
   }
 
+  // get hero by id
   getHero(id: number): Observable<Hero> {
     let url = `${this.heroesUrl}/${id}`;
     return this.http
@@ -39,6 +40,25 @@ export class HeroService {
         catchError(
           this.handleError<Hero>('getHero', { id: 0, name: 'fallback hero' })
         )
+      );
+  }
+  // update hero
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
+  // InMemoryWebApi doesn’t persist changes — it stores them in memory only during runtime. When you reload the app, the data resets to the original array from createDb().
+  // So after an update, the change is only visible until you refresh.
+  // If you reload, it goes back to the original.
+  // The HttpClient.put() method takes three parameters:
+
+  // The URL
+  // The data to update, which is the modified hero in this case
+  // Options
+  updateHero(hero: Hero): Observable<any> {
+    return this.http
+      .put(this.heroesUrl, hero, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<any>('Update Hero', 'failed to update'))
       );
   }
 }

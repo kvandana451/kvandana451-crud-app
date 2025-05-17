@@ -3,7 +3,7 @@
     <p>id:{{hero.id}}</p>
     <span class="hero-name">Hero Name: </span><br>
     <input type="text" [(ngModel)]="hero.name"><br>
-    <button class="back-btn">Go Back</button>
-    <button class="save-btn">Save</button>
+    <button class="back-btn" (click)="goBack()">Go Back</button>
+    <button class="save-btn" (click)="save()">Save</button>
 
 </div>
