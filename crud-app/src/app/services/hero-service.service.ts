@@ -30,4 +30,15 @@ export class HeroService {
       return of(result);
     };
   }
+
+  getHero(id: number): Observable<Hero> {
+    let url = `${this.heroesUrl}/${id}`;
+    return this.http
+      .get<Hero>(url)
+      .pipe(
+        catchError(
+          this.handleError<Hero>('getHero', { id: 0, name: 'fallback hero' })
+        )
+      );
+  }
 }

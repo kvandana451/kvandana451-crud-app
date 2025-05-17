@@ -11,11 +11,6 @@ import { Hero } from './interfaces/hero';
 })
 export class AppComponent {
   title = 'crud-app';
-  constructor(private heroService: HeroService) {}
-  ngOnInit() {
-    // console.log(this.heroService.getHeroes());
-    this.heroService.getHeroes().subscribe((value: any) => {
-      console.log(value);
-    });
-  }
+  constructor() {}
+  ngOnInit() {}
 }
