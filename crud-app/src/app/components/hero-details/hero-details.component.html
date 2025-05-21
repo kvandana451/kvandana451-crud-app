@@ -1,8 +1,8 @@
-<div *ngIf="hero">
+<div *ngIf="hero && hero.id">
     <span class="hero-title">{{hero.name}} Details</span>
     <p>id:{{hero.id}}</p>
     <span class="hero-name">Hero Name: </span><br>
-    <input type="text" [(ngModel)]="hero.name"><br>
+    <input type="text" [(ngModel)]="hero.name" #heroName><br>
     <button class="back-btn" (click)="goBack()">Go Back</button>
     <button class="save-btn" (click)="save()">Save</button>
 

@@ -21,18 +21,23 @@ export class HeroDetailsComponent {
   ) {}
   save(): void {
     if (this.hero)
-      this.heroService.updateHero(this.hero).subscribe(() => {
+      this.heroService.updateHero(this.hero).subscribe((value: Hero) => {
+        console.log(value); //returns null
+        // Because HttpClientInMemoryWebApiModule is a mock server, and:
+        // It doesn’t always return the updated data properly.
+        // By default, PUT() in this mock returns null
         this.goBack();
       });
   }
   goBack() {
     this.router.navigate(['/heroes']);
   }
+
   ngOnInit() {
     this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.heroService.getHero(this.id).subscribe((val) => {
-      console.log(val);
-      this.hero = val;
+    this.heroService.getHero(this.id).subscribe((value: Hero) => {
+      console.log(value);
+      this.hero = value;
     });
   }
 }

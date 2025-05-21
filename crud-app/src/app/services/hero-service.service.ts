@@ -6,11 +6,17 @@ import { catchError, Observable, of, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
+
+// Note:You don’t see network (tab) requests because Angular’s InMemoryWebApi handles them without hitting a real server.
+// This is expected behavior.
+// No Network tab → rely on:
+// console.log
+// DOM inspection (Inspect Element)
+// Angular error messages in the console
 export class HeroService {
   constructor(private http: HttpClient) {}
   // Define the heroesUrl of the form :base/:collectionName with the address of the heroes resource on the server. Here base is the resource to which requests are made, and collectionName is the heroes data object in the in-memory-data-service.ts.
   private heroesUrl = 'api/heroes';
-
   getHeroes(): Observable<Hero[]> {
     // HttpClient.get() returns the body of the response as an untyped JSON object by default. Applying the optional type specifier, <Hero[]> , adds TypeScript capabilities, which reduce errors during compile time.
     //  get() is a generic function
@@ -25,7 +31,7 @@ export class HeroService {
 
   handleError<T>(operation: string, result: T) {
     return (err: any): Observable<T> => {
-      console.error(err);
+      console.log(err);
       console.log(operation);
       return of(result);
     };
@@ -38,11 +44,11 @@ export class HeroService {
       .get<Hero>(url)
       .pipe(
         catchError(
-          this.handleError<Hero>('getHero', { id: 0, name: 'fallback hero' })
+          this.handleError<Hero>('Get a Hero', { id: 0, name: 'fallback' })
         )
       );
   }
-  // update hero
+  // Update hero
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
@@ -61,4 +67,32 @@ export class HeroService {
         catchError(this.handleError<any>('Update Hero', 'failed to update'))
       );
   }
+
+  // Add Hero
+
+  addHero(hero: any): Observable<Hero> {
+    return this.http
+      .post<Hero>(this.heroesUrl, hero, this.httpOptions)
+      .pipe(catchError(this.handleError<Hero>('Add a hero', hero)));
+  }
 }
+
+//UPDATE HERO
+
+//   updateHero(hero: Hero): Observable<Hero> {
+//   return this.http
+//     .put<Hero>(this.heroesUrl, hero, this.httpOptions)
+//     .pipe(catchError(this.handleError<Hero>('Update a Hero', hero)));
+// }
+
+// ADD HERO
+
+// addHero(hero: any): Observable<Hero> {
+//   return this.http
+//     .post<Hero>(this.heroesUrl, hero)
+//     .pipe(
+//       catchError(
+//         this.handleError<Hero>('Add a hero', { id: 0, name: 'fallback' })
+//       )
+//     );
+// }

@@ -1,5 +1,10 @@
 <h2>My heroes</h2>
-<div class="heroes-section">
+<div>
+    <label>Hero Name: </label>
+    <input type="text" #heroName />
+    <button class="add-btn" (click)="addHero(heroName)">Add Hero</button>
+</div>
+<div class=" heroes-section">
     <a *ngFor="let hero of heroes" class="hero-container" routerLink="/hero-details/{{hero.id}}">
         <span class=" hero">
             <span class="badge">{{hero.id}}</span>

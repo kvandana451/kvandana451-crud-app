@@ -1,6 +1,20 @@
+.add-btn{
+    display:block;
+    padding:1em;
+    border:none;
+    border-radius:4px;
+    cursor:pointer;
+    margin-top:10px;
+    width:clamp(100px,60%,150px)
+}
+.add-btn:hover{
+    background-color:#2c3a41;
+    color:#ffffff
+}
 .heroes-section{
     display:flex;
     flex-direction:column;
+    margin-top:40px;
 
 
 }

@@ -14,10 +14,25 @@ import { RouterLink } from '@angular/router';
 export class HeroesComponent {
   heroes?: Hero[];
   constructor(private heroService: HeroService) {}
-  ngOnInit() {
-    this.heroService.getHeroes().subscribe((value: any) => {
-      console.log(value);
+  addHero(ele: any) {
+    let name = ele.value;
+    ele.value = '';
+    if (!name) {
+      return;
+    }
+    name = name.trim();
+    console.log(name);
+    this.heroService.addHero({ name }).subscribe((hero: any) => {
+      this.getHeroes();
+    });
+  }
+
+  getHeroes() {
+    this.heroService.getHeroes().subscribe((value) => {
       this.heroes = value;
     });
+  }
+  ngOnInit() {
+    this.getHeroes();
   }
 }
