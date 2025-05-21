@@ -4,12 +4,19 @@
     <input type="text" #heroName />
     <button class="add-btn" (click)="addHero(heroName)">Add Hero</button>
 </div>
-<div class=" heroes-section">
-    <a *ngFor="let hero of heroes" class="hero-container" routerLink="/hero-details/{{hero.id}}">
+<div class=" heroes-section" *ngFor="let hero of heroes">
+    <a class="hero-container" routerLink="/hero-details/{{hero.id}}">
         <span class=" hero">
             <span class="badge">{{hero.id}}</span>
             <span>{{hero.name}}</span>
+
         </span>
 
+
     </a>
+    <button type="button" class="delete-btn" (click)="delete(hero)">x</button>
+
+
+
+
 </div>

@@ -26,6 +26,13 @@ export class HeroesComponent {
       this.getHeroes();
     });
   }
+  delete(hero: Hero) {
+    // server returns null if data is successfully deleted
+    this.heroService.deleteHero(hero).subscribe((failedData: Hero) => {
+      console.log(failedData);
+      this.getHeroes();
+    });
+  }
 
   getHeroes() {
     this.heroService.getHeroes().subscribe((value) => {

@@ -1,57 +1,73 @@
-.add-btn{
-    display:block;
-    padding:1em;
-    border:none;
-    border-radius:4px;
-    cursor:pointer;
-    margin-top:10px;
-    width:clamp(100px,60%,150px)
+.add-btn {
+  display: block;
+  padding: 1em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom:20px;
+  width: clamp(100px, 60%, 150px);
 }
-.add-btn:hover{
-    background-color:#2c3a41;
-    color:#ffffff
+.add-btn:hover {
+  background-color: #2c3a41;
+  color: #ffffff;
 }
-.heroes-section{
-    display:flex;
-    flex-direction:column;
-    margin-top:40px;
-
-
-}
-.hero-container{
-    display:flex;
-        text-decoration:none;
-        color:#000000;
+.heroes-section {
+  display: flex;
+  flex-direction: column;
+      position: relative;
 
 }
-.hero{
-    background-color:#eee;
-    border-radius:4px;
-    flex-basis:150px;
-    cursor:pointer;
-    // padding:.5em .5em .5em 0;
-    margin:0 0 5px 0;
-    display:flex;
-    justify-content :flex-start;
-    align-items:center
+.hero-container {
+  display: flex;
+  text-decoration: none;
+  color: #000000;
+  max-width:150px;
+
 }
 .hero {
-    .badge{
-         background-color: #405061;
-         color:#ffff;
-         margin-right:6px;
-         padding:.5em;
-         border-radius:2px 0 0 2px;
-         align-self:stretch
-    }
+  background-color: #eee;
+  border-radius: 4px;
+  flex-basis: 150px;
+  cursor: pointer;
+  // padding:.5em .5em .5em 0;
+  margin: 0 0 5px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
-.hero:hover{
-    color: #2c3a41;
-    background-color: #e6e6e6;
-    margin-left:.15em
+.hero {
+  .badge {
+    background-color: #405061;
+    color: #ffff;
+    margin-right: 6px;
+    padding: 0.5em;
+    border-radius: 2px 0 0 2px;
+    align-self: stretch;
+  }
+}
+.hero:hover {
+  color: #2c3a41;
+  background-color: #e6e6e6;
+  margin-left: 0.15em;
+}
+.hero:active {
+  color: #fff;
+  background-color: black;
+}
+.heroes-section .delete-btn {
+  border: none;
+  border-radius: 2px;
+  background-color: #ffff;
+  font-size: 0.8rem;
+  color: Grey;
+  position: absolute;
+  left:127px;
+  top:10px;
+  cursor:pointer;
 
 }
-.hero:active{
-    color:#fff;
-    background-color:black
+.heroes-section .delete-btn:hover {
+  background-color: #405061;
+  color: #ffffff;
 }

@@ -75,6 +75,14 @@ export class HeroService {
       .post<Hero>(this.heroesUrl, hero, this.httpOptions)
       .pipe(catchError(this.handleError<Hero>('Add a hero', hero)));
   }
+
+  // Delete Hero
+  deleteHero(hero: Hero): Observable<Hero> {
+    const url = `${this.heroesUrl}/${hero.id}`;
+    return this.http
+      .delete<Hero>(url, this.httpOptions)
+      .pipe(catchError(this.handleError<Hero>('Delete a Hero', hero)));
+  }
 }
 
 //UPDATE HERO
