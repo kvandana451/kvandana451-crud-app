@@ -1,6 +1,18 @@
+<!-- When a variable ends with $, it usually means it's an Observable (not a rule, just a best practice). -->
+<!-- | async automatically:
+Subscribes to the Observable
+Gets the emitted value (e.g., the list of heroes) 
+It updates the view with that value
+It automatically unsubscribes when the component is destroyed
+-->
 <div>
     <label>Hero Search</label>
     <input #searchBox (input)="search(searchBox.value)" />
+    <ul class="search-result">
+        <li *ngFor="let hero of heroes$ | async">
+            <a routerLink="/hero-details/{{hero.id}}">{{hero.name}}</a>
+        </li>
+    </ul>
 
 
 </div>
