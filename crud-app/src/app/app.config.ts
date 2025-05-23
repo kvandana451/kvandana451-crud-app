@@ -2,6 +2,7 @@ import {
   ApplicationConfig,
   inject,
   Injectable,
+  isDevMode,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
@@ -16,14 +17,18 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    importProvidersFrom(
-      // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-      // and returns simulated server responses.
-      // Remove it when a real server is ready to receive requests.
-      HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
-        dataEncapsulation: false,
-      })
-    ),
+    ...(isDevMode()
+      ? [
+          importProvidersFrom(
+            // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+            // and returns simulated server responses.
+            // Remove it when a real server is ready to receive requests.
+            HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+              dataEncapsulation: false,
+            })
+          ),
+        ]
+      : []),
   ],
 };
 @Injectable({ providedIn: 'root' })
