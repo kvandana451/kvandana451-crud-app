@@ -6,7 +6,9 @@ It updates the view with that value
 It automatically unsubscribes when the component is destroyed
 -->
 <div>
-    <label>Hero Search</label>
+    <label>
+        <h2>Hero Search</h2>
+    </label>
     <input #searchBox (input)="search(searchBox.value)" />
     <ul class="search-result">
         <li *ngFor="let hero of heroes$ | async">

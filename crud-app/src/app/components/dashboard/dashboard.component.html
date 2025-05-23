@@ -1,1 +1,12 @@
+<h2>Top Heroes</h2>
+<div class=" heroes-section">
+    <a class="hero-container" *ngFor="let hero of topHeroes" routerLink="/hero-details/{{hero.id}}">
+        <span class=" hero">
+            <span>{{hero.name}}</span>
+
+        </span>
+
+
+    </a>
+</div>
 <app-hero-search></app-hero-search>
